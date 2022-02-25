@@ -1,0 +1,37 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}
+    Liste des personnes
+{% endblock %}
+
+{% block body %}
+    <h1>Liste des personnes</h1>
+    <div class="row">
+        {% for personne in personnes %}
+            <div class="card col-3 m-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ personne.firstname }} {{ personne.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ personne.age }}</h6>
+                    <p class="card-text">Je suis {{ personne.firstname }} {{ personne.name }} et j'ai {{ personne.age }} ans</p>
+                    <a href="{{ path('personne.details', {id: personne.id }) }}" class="card-link"><i class="fas fa-info"></i></a>
+                    <a href="{{ path('personne.delete', {id: personne.id }) }}" class="card-link"><i class="fas fa-user-times"></i>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page > 1 %}
+            <li class="page-item"><a class="page-link" href="{{path('personne.list', {numPage: page - 1, limit: limit})}}">Previous</a></li>
+            {% endif %}
+            {% for i in 1..nbrePage %}
+                <li class="page-item"><a class="page-link" href="{{path('personne.list', {numPage: i, limit: limit})}}">{{ i }}</a></li>
+            {% endfor %}
+            {% if page < nbrePage %}
+            <li class="page-item"><a class="page-link" href="{{path('personne.list', {numPage: page + 1, limit: limit})}}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}
+

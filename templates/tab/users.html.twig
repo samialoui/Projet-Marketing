@@ -1,0 +1,38 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+    {{ path('tab', {nb: 7}) }} <br>
+    {{ url('tab', {nb: 7}) }}
+    <a href="{{ path('tab', {nb: 7}) }}">Tableau de 7 notes</a>
+    <img src="{{ asset('images/gateau.jpg') }}">
+    <div class="alert alert-warning">
+        Liste des users
+    </div>
+    <table class="table">
+        <tr class="table-active">
+            <td>Name</td>
+            <td>Firstname</td>
+            <td>Age</td>
+        </tr>
+        {% for user in users %}
+        <tr class="
+                    {% if loop.index is even %}table-danger
+                    {% else %} table-warning
+                    {% endif %}
+                ">
+            <td>{{ user.name }}</td>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.age }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {{ include('fragments/error-messages.html.twig', {message: 'Random Error'}) }}
+    {{ render(controller('App\\Controller\\TabController::index',{nb: 10})) }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} : Users
+{% endblock%}
+
+{% block pageH1 %}
+    Users
+{% endblock %}

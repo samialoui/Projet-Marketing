@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="alert alert-warning">
+        Liste des notes
+    </div>
+    <table class="table">
+        {% for note in tableau %}
+            <tr>
+                <td>
+                    {{ note }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="alert alert-secondary">
+        <p>La pire note est : {{ min(tableau)  }}</p>
+        <p>La meilleur note est : {{ max(tableau)  }}</p>
+        <p>Le nombre note est : {{ tableau | length   }}</p>
+    </div>
+{% endblock %}
+
+{% block title %}
+    Notes
+{% endblock %}
